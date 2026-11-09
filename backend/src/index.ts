@@ -1,9 +1,29 @@
 import express, { type Express, type Request, type Response } from "express";
 import fetch from "node-fetch";
+import { sign } from "node:crypto";
 
 const app: Express = express();
 app.use(express.json());
 const port = 3000;
+
+interface Relic {}
+
+interface Character {
+  relicList: Relic[];
+  level: number;
+  promotion: number;
+  avatardId: number;
+  //find a way to map id and path
+}
+
+interface CharacterInfo {
+  avatarDetailList: Character[];
+}
+
+interface Profile {
+  detailInfo: CharacterInfo;
+  uid: number;
+}
 
 app.get("/api", async (req: Request, res: Response) => {
   try {
@@ -28,7 +48,10 @@ app.get("/profile/:id", async (req: Request, res: Response) => {
       },
     });
     const profile = await response.json();
-    res.send(profile);
+
+    const { detailInfo, uid } = profile as Profile;
+    const { avatarDetailList } = detailInfo;
+    res.send({ avatarDetailList, uid });
   } catch (error: any) {
     console.error(error.message);
     res.status(500);
