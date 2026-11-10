@@ -1,6 +1,5 @@
 import express, { type Express, type Request, type Response } from "express";
 import fetch from "node-fetch";
-import { sign } from "node:crypto";
 
 const app: Express = express();
 app.use(express.json());
@@ -11,7 +10,7 @@ interface Relic {}
 interface Character {
   relicList: Relic[];
   level: number;
-  promotion: number;
+  rank: number;
   avatardId: number;
   //find a way to map id and path
 }
