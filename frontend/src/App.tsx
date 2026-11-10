@@ -10,7 +10,7 @@ function App() {
   return (
     <div>
       <Input setProfile={setProfile} />
-      <Characters avatarDetailList={profile?.avatarDetailList} />
+      {profile && <Characters avatarDetailList={profile?.avatarDetailList} />}
     </div>
   );
 }
