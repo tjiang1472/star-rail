@@ -1,16 +1,16 @@
+import { baseinfo } from "../dictionary/baseinfo";
+
 export default function Stats({ avatarDetailList }: any) {
-  function log() {
-    console.log(avatarDetailList);
+  function find(id: any) {
+    console.log(baseinfo[id]);
+    // return baseinfo[id];
+    return baseinfo[id].name;
   }
 
   return (
     <div>
-      <button onClick={log}></button>
       {avatarDetailList?.map((character: any) => (
-        <img
-          key={character.avatarId}
-          src={`https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/avatarroundicon/avatar/${character.avatarId}.png`}
-        ></img>
+        <div key={character.avatarId}>{find(character.avatarId)}</div>
       ))}
     </div>
   );
